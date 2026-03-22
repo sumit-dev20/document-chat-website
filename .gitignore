@@ -10,4 +10,4 @@ wheels/
 .venv
 .env
 chroma
-database
+chat.db
