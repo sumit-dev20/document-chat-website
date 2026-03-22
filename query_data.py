@@ -5,11 +5,15 @@ from dotenv import load_dotenv
 from langchain_pinecone import PineconeVectorStore
 from langchain_community.vectorstores import FAISS
 from langchain_chroma import Chroma
+from openai import OpenAI
+import os
 
 load_dotenv(override=True)
 
 
-llm = OllamaLLM(model="gpt-oss:20b")
+llm = OpenAI(
+    api_key=os.environ.get("GROQ_API_KEY"), base_url="https://api.groq.com/openai/v1"
+)
 
 
 def llm_response(query_text: str, collection_name: str) -> str:
@@ -39,7 +43,9 @@ def llm_response(query_text: str, collection_name: str) -> str:
 
     prompt_template = ChatPromptTemplate.from_template(PROMPT_TEMPLATE)
     prompt = prompt_template.format(context=context_text, query=query_text)
-    final_result = llm.invoke(prompt)
+    final_result = llm.responses.create(
+        input=prompt, model="openai/gpt-oss-20b"
+    ).output_text
 
     print("final_result ==>> ", final_result)
     return final_result

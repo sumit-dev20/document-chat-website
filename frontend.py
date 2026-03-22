@@ -124,9 +124,9 @@ else:
             content=user_input.strip(),
             role="user",
         )
-        # st.session_state.chat_history.append(
-        #     {"role": "user", "content": user_input.strip()}
-        # )
+        st.session_state.chat_history.append(
+            {"role": "user", "content": user_input.strip()}
+        )
 
         # Show thinking animation while "calling" LLM
         with st.chat_message("assistant"):
@@ -147,4 +147,4 @@ else:
             content=response,
             role="assistant",
         )
-        # st.session_state.chat_history.append({"role": "assistant", "content": response})
+        st.session_state.chat_history.append({"role": "assistant", "content": response})
