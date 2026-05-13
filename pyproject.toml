@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "faiss-cpu>=1.13.2",
+    "fastapi>=0.136.1",
     "langchain>=1.2.12",
     "langchain-chroma>=1.1.0",
     "langchain-community>=0.4.1",
@@ -18,7 +19,9 @@ dependencies = [
     "ollama>=0.6.1",
     "pdfplumber>=0.11.9",
     # "python-magic-bin>=0.4.14", only for windows
+    "python-multipart>=0.0.28",
     "sentence-transformers>=5.3.0",
     "streamlit>=1.55.0",
     "unstructured[md]>=0.21.5",
+    "uvicorn>=0.42.0",
 ]

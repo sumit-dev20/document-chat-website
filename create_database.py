@@ -15,11 +15,12 @@ import uuid
 load_dotenv(override=True)
 
 
-def load_documents(uploaded_file):
+async def load_documents(uploaded_file):
 
-    suffix = os.path.splitext(uploaded_file.name)[1]  # e.g. ".pdf"
+    suffix = os.path.splitext(uploaded_file.filename)[1]  # e.g. ".pdf"
     with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as tmp:
-        tmp.write(uploaded_file.read())
+        file = await uploaded_file.read()
+        tmp.write(file)
         tmp_path = tmp.name
     if suffix == ".pdf":
         loader = PyPDFLoader(tmp_path)
@@ -72,8 +73,8 @@ def save_to_database(chunks: list[Document]) -> str:
     return collection_name
 
 
-def create_databse(uploaded_file) -> str:
-    documents = load_documents(uploaded_file)
+async def create_database(uploaded_file) -> str:
+    documents = await load_documents(uploaded_file)
     chunks = split_text(documents)
     name = save_to_database(chunks)
     return name

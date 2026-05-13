@@ -1,9 +1,6 @@
-from langchain_ollama import OllamaLLM
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import OpenAIEmbeddings
 from dotenv import load_dotenv
-from langchain_pinecone import PineconeVectorStore
-from langchain_community.vectorstores import FAISS
 from langchain_chroma import Chroma
 from openai import OpenAI
 import os
@@ -25,7 +22,8 @@ def llm_response(query_text: str, collection_name: str) -> str:
         persist_directory="chroma",
     )
     results = db.similarity_search_with_relevance_scores(query_text, k=5)
-    if len(results) == 0 or results[0][1] < 0.7:
+    print("score => ", results[0][1])
+    if len(results) == 0 or results[0][1] < 0.5:
         return "Unable to find matching results."
 
     context_text = "\n\n---\n\n".join([doc.page_content for doc, _score in results])
