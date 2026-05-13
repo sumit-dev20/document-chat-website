@@ -1,0 +1,11 @@
+fastapi>=0.136.1
+langchain>=1.2.12
+langchain-community>=0.4.1
+langchain-core>=1.2.20
+langchain-openai>=1.1.11
+langchain-text-splitters>=1.1.1
+pdfplumber>=0.11.9
+python-multipart>=0.0.28
+streamlit>=1.55.0
+unstructured[md]>=0.21.5
+uvicorn>=0.42.0
